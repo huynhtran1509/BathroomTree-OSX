@@ -1,0 +1,549 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3AEB982EC284481BBE26A505 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 819B8825E3824FC490011D35 /* libPods.a */; };
+		8724BF2F18942FC800A314F7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8724BF2E18942FC800A314F7 /* Cocoa.framework */; };
+		8724BF3918942FC800A314F7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8724BF3718942FC800A314F7 /* InfoPlist.strings */; };
+		8724BF3B18942FC800A314F7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8724BF3A18942FC800A314F7 /* main.m */; };
+		8724BF3F18942FC800A314F7 /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 8724BF3D18942FC800A314F7 /* Credits.rtf */; };
+		8724BF4218942FC800A314F7 /* BTAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 8724BF4118942FC800A314F7 /* BTAppDelegate.m */; };
+		8724BF4518942FC800A314F7 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 8724BF4318942FC800A314F7 /* MainMenu.xib */; };
+		8724BF4718942FC800A314F7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8724BF4618942FC800A314F7 /* Images.xcassets */; };
+		8724BF4E18942FC800A314F7 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8724BF4D18942FC800A314F7 /* XCTest.framework */; };
+		8724BF4F18942FC800A314F7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8724BF2E18942FC800A314F7 /* Cocoa.framework */; };
+		8724BF5718942FC800A314F7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8724BF5518942FC800A314F7 /* InfoPlist.strings */; };
+		8724BF5918942FC800A314F7 /* BathroomTreeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8724BF5818942FC800A314F7 /* BathroomTreeTests.m */; };
+		87689FB618948971005984F3 /* BTStatusPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87689FB518948971005984F3 /* BTStatusPopupView.m */; };
+		87689FB9189489E3005984F3 /* BTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87689FB8189489E3005984F3 /* BTViewController.m */; };
+		87689FC01894CE60005984F3 /* BTStatusItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87689FBF1894CE60005984F3 /* BTStatusItemView.m */; };
+		87689FC31895930C005984F3 /* BTHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 87689FC21895930C005984F3 /* BTHTTPSessionManager.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		8724BF5018942FC800A314F7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 8724BF2318942FC800A314F7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 8724BF2A18942FC800A314F7;
+			remoteInfo = BathroomTree;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		20C7C289E5C240EC9C77BE80 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
+		819B8825E3824FC490011D35 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		8724BF2B18942FC800A314F7 /* BathroomTree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BathroomTree.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		8724BF2E18942FC800A314F7 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
+		8724BF3118942FC800A314F7 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
+		8724BF3218942FC800A314F7 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
+		8724BF3318942FC800A314F7 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		8724BF3618942FC800A314F7 /* BathroomTree-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BathroomTree-Info.plist"; sourceTree = "<group>"; };
+		8724BF3818942FC800A314F7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8724BF3A18942FC800A314F7 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		8724BF3C18942FC800A314F7 /* BathroomTree-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "BathroomTree-Prefix.pch"; sourceTree = "<group>"; };
+		8724BF3E18942FC800A314F7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.rtf; name = en; path = en.lproj/Credits.rtf; sourceTree = "<group>"; };
+		8724BF4018942FC800A314F7 /* BTAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BTAppDelegate.h; sourceTree = "<group>"; };
+		8724BF4118942FC800A314F7 /* BTAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BTAppDelegate.m; sourceTree = "<group>"; };
+		8724BF4418942FC800A314F7 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/MainMenu.xib; sourceTree = "<group>"; };
+		8724BF4618942FC800A314F7 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		8724BF4C18942FC800A314F7 /* BathroomTreeTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BathroomTreeTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8724BF4D18942FC800A314F7 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		8724BF5418942FC800A314F7 /* BathroomTreeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BathroomTreeTests-Info.plist"; sourceTree = "<group>"; };
+		8724BF5618942FC800A314F7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		8724BF5818942FC800A314F7 /* BathroomTreeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BathroomTreeTests.m; sourceTree = "<group>"; };
+		87689FB418948971005984F3 /* BTStatusPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTStatusPopupView.h; sourceTree = "<group>"; };
+		87689FB518948971005984F3 /* BTStatusPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTStatusPopupView.m; sourceTree = "<group>"; };
+		87689FB7189489E3005984F3 /* BTViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTViewController.h; sourceTree = "<group>"; };
+		87689FB8189489E3005984F3 /* BTViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTViewController.m; sourceTree = "<group>"; };
+		87689FBE1894CE60005984F3 /* BTStatusItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTStatusItemView.h; sourceTree = "<group>"; };
+		87689FBF1894CE60005984F3 /* BTStatusItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTStatusItemView.m; sourceTree = "<group>"; };
+		87689FC11895930C005984F3 /* BTHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTHTTPSessionManager.h; sourceTree = "<group>"; };
+		87689FC21895930C005984F3 /* BTHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTHTTPSessionManager.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		8724BF2818942FC800A314F7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8724BF2F18942FC800A314F7 /* Cocoa.framework in Frameworks */,
+				3AEB982EC284481BBE26A505 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8724BF4918942FC800A314F7 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8724BF4F18942FC800A314F7 /* Cocoa.framework in Frameworks */,
+				8724BF4E18942FC800A314F7 /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		8724BF2218942FC800A314F7 = {
+			isa = PBXGroup;
+			children = (
+				8724BF3418942FC800A314F7 /* BathroomTree */,
+				8724BF5218942FC800A314F7 /* BathroomTreeTests */,
+				8724BF2D18942FC800A314F7 /* Frameworks */,
+				8724BF2C18942FC800A314F7 /* Products */,
+				20C7C289E5C240EC9C77BE80 /* Pods.xcconfig */,
+			);
+			sourceTree = "<group>";
+		};
+		8724BF2C18942FC800A314F7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				8724BF2B18942FC800A314F7 /* BathroomTree.app */,
+				8724BF4C18942FC800A314F7 /* BathroomTreeTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		8724BF2D18942FC800A314F7 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8724BF2E18942FC800A314F7 /* Cocoa.framework */,
+				8724BF4D18942FC800A314F7 /* XCTest.framework */,
+				8724BF3018942FC800A314F7 /* Other Frameworks */,
+				819B8825E3824FC490011D35 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		8724BF3018942FC800A314F7 /* Other Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				8724BF3118942FC800A314F7 /* AppKit.framework */,
+				8724BF3218942FC800A314F7 /* CoreData.framework */,
+				8724BF3318942FC800A314F7 /* Foundation.framework */,
+			);
+			name = "Other Frameworks";
+			sourceTree = "<group>";
+		};
+		8724BF3418942FC800A314F7 /* BathroomTree */ = {
+			isa = PBXGroup;
+			children = (
+				8724BF4018942FC800A314F7 /* BTAppDelegate.h */,
+				8724BF4118942FC800A314F7 /* BTAppDelegate.m */,
+				87689FC11895930C005984F3 /* BTHTTPSessionManager.h */,
+				87689FC21895930C005984F3 /* BTHTTPSessionManager.m */,
+				87689FB418948971005984F3 /* BTStatusPopupView.h */,
+				87689FB518948971005984F3 /* BTStatusPopupView.m */,
+				87689FB7189489E3005984F3 /* BTViewController.h */,
+				87689FB8189489E3005984F3 /* BTViewController.m */,
+				87689FBE1894CE60005984F3 /* BTStatusItemView.h */,
+				87689FBF1894CE60005984F3 /* BTStatusItemView.m */,
+				8724BF4318942FC800A314F7 /* MainMenu.xib */,
+				8724BF4618942FC800A314F7 /* Images.xcassets */,
+				8724BF3518942FC800A314F7 /* Supporting Files */,
+			);
+			path = BathroomTree;
+			sourceTree = "<group>";
+		};
+		8724BF3518942FC800A314F7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8724BF3618942FC800A314F7 /* BathroomTree-Info.plist */,
+				8724BF3718942FC800A314F7 /* InfoPlist.strings */,
+				8724BF3A18942FC800A314F7 /* main.m */,
+				8724BF3C18942FC800A314F7 /* BathroomTree-Prefix.pch */,
+				8724BF3D18942FC800A314F7 /* Credits.rtf */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		8724BF5218942FC800A314F7 /* BathroomTreeTests */ = {
+			isa = PBXGroup;
+			children = (
+				8724BF5818942FC800A314F7 /* BathroomTreeTests.m */,
+				8724BF5318942FC800A314F7 /* Supporting Files */,
+			);
+			path = BathroomTreeTests;
+			sourceTree = "<group>";
+		};
+		8724BF5318942FC800A314F7 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				8724BF5418942FC800A314F7 /* BathroomTreeTests-Info.plist */,
+				8724BF5518942FC800A314F7 /* InfoPlist.strings */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		8724BF2A18942FC800A314F7 /* BathroomTree */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8724BF5C18942FC800A314F7 /* Build configuration list for PBXNativeTarget "BathroomTree" */;
+			buildPhases = (
+				DC4F744124D54709B643B759 /* Check Pods Manifest.lock */,
+				8724BF2718942FC800A314F7 /* Sources */,
+				8724BF2818942FC800A314F7 /* Frameworks */,
+				8724BF2918942FC800A314F7 /* Resources */,
+				84794A0A01484DC38DE537E6 /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = BathroomTree;
+			productName = BathroomTree;
+			productReference = 8724BF2B18942FC800A314F7 /* BathroomTree.app */;
+			productType = "com.apple.product-type.application";
+		};
+		8724BF4B18942FC800A314F7 /* BathroomTreeTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8724BF5F18942FC800A314F7 /* Build configuration list for PBXNativeTarget "BathroomTreeTests" */;
+			buildPhases = (
+				8724BF4818942FC800A314F7 /* Sources */,
+				8724BF4918942FC800A314F7 /* Frameworks */,
+				8724BF4A18942FC800A314F7 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8724BF5118942FC800A314F7 /* PBXTargetDependency */,
+			);
+			name = BathroomTreeTests;
+			productName = BathroomTreeTests;
+			productReference = 8724BF4C18942FC800A314F7 /* BathroomTreeTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		8724BF2318942FC800A314F7 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = BT;
+				LastUpgradeCheck = 0500;
+				ORGANIZATIONNAME = "WillowTreeApps, Inc.";
+				TargetAttributes = {
+					8724BF4B18942FC800A314F7 = {
+						TestTargetID = 8724BF2A18942FC800A314F7;
+					};
+				};
+			};
+			buildConfigurationList = 8724BF2618942FC800A314F7 /* Build configuration list for PBXProject "BathroomTree" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 8724BF2218942FC800A314F7;
+			productRefGroup = 8724BF2C18942FC800A314F7 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				8724BF2A18942FC800A314F7 /* BathroomTree */,
+				8724BF4B18942FC800A314F7 /* BathroomTreeTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		8724BF2918942FC800A314F7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8724BF3918942FC800A314F7 /* InfoPlist.strings in Resources */,
+				8724BF4718942FC800A314F7 /* Images.xcassets in Resources */,
+				8724BF3F18942FC800A314F7 /* Credits.rtf in Resources */,
+				8724BF4518942FC800A314F7 /* MainMenu.xib in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8724BF4A18942FC800A314F7 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8724BF5718942FC800A314F7 /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		84794A0A01484DC38DE537E6 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		DC4F744124D54709B643B759 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		8724BF2718942FC800A314F7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				87689FC31895930C005984F3 /* BTHTTPSessionManager.m in Sources */,
+				87689FC01894CE60005984F3 /* BTStatusItemView.m in Sources */,
+				87689FB9189489E3005984F3 /* BTViewController.m in Sources */,
+				8724BF4218942FC800A314F7 /* BTAppDelegate.m in Sources */,
+				8724BF3B18942FC800A314F7 /* main.m in Sources */,
+				87689FB618948971005984F3 /* BTStatusPopupView.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		8724BF4818942FC800A314F7 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8724BF5918942FC800A314F7 /* BathroomTreeTests.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		8724BF5118942FC800A314F7 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 8724BF2A18942FC800A314F7 /* BathroomTree */;
+			targetProxy = 8724BF5018942FC800A314F7 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		8724BF3718942FC800A314F7 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8724BF3818942FC800A314F7 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+		8724BF3D18942FC800A314F7 /* Credits.rtf */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8724BF3E18942FC800A314F7 /* en */,
+			);
+			name = Credits.rtf;
+			sourceTree = "<group>";
+		};
+		8724BF4318942FC800A314F7 /* MainMenu.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8724BF4418942FC800A314F7 /* Base */,
+			);
+			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		8724BF5518942FC800A314F7 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				8724BF5618942FC800A314F7 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		8724BF5A18942FC800A314F7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		8724BF5B18942FC800A314F7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		8724BF5D18942FC800A314F7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 20C7C289E5C240EC9C77BE80 /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BathroomTree/BathroomTree-Prefix.pch";
+				INFOPLIST_FILE = "BathroomTree/BathroomTree-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		8724BF5E18942FC800A314F7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 20C7C289E5C240EC9C77BE80 /* Pods.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				COMBINE_HIDPI_IMAGES = YES;
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BathroomTree/BathroomTree-Prefix.pch";
+				INFOPLIST_FILE = "BathroomTree/BathroomTree-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+		8724BF6018942FC800A314F7 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BathroomTree.app/Contents/MacOS/BathroomTree";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BathroomTree/BathroomTree-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "BathroomTreeTests/BathroomTreeTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		8724BF6118942FC800A314F7 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(BUILT_PRODUCTS_DIR)/BathroomTree.app/Contents/MacOS/BathroomTree";
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "BathroomTree/BathroomTree-Prefix.pch";
+				INFOPLIST_FILE = "BathroomTreeTests/BathroomTreeTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TEST_HOST = "$(BUNDLE_LOADER)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		8724BF2618942FC800A314F7 /* Build configuration list for PBXProject "BathroomTree" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8724BF5A18942FC800A314F7 /* Debug */,
+				8724BF5B18942FC800A314F7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8724BF5C18942FC800A314F7 /* Build configuration list for PBXNativeTarget "BathroomTree" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8724BF5D18942FC800A314F7 /* Debug */,
+				8724BF5E18942FC800A314F7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		8724BF5F18942FC800A314F7 /* Build configuration list for PBXNativeTarget "BathroomTreeTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8724BF6018942FC800A314F7 /* Debug */,
+				8724BF6118942FC800A314F7 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 8724BF2318942FC800A314F7 /* Project object */;
+}
