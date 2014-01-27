@@ -61,13 +61,10 @@
     
     if ([manager error])
     {
-        [[self statusItemView] configureWithBathrooms:nil];
         [[self descriptionItem] setTitle:@"Error Connecting to Server"];
     }
     else
     {
-        [[self statusItemView] configureWithBathrooms:[manager bathrooms]];
-        
         NSArray *availableBathrooms = [manager availableBathrooms];
         NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
         if ([availableBathrooms count] &&

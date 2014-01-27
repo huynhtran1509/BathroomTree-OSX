@@ -10,7 +10,7 @@
 
 @interface BTStatusItemView : NSView
 
-@property (nonatomic, readwrite, strong) NSStatusItem *statusItem;
+@property (nonatomic, readwrite, weak) NSStatusItem *statusItem;
 @property (nonatomic, readwrite, strong) IBOutlet NSMenuItem *descriptionItem;
 
 - (void)configureWithBathrooms:(NSArray *)bathrooms;

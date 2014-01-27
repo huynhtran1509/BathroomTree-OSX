@@ -22,15 +22,26 @@
 
 @implementation BTStatusItemView
 
-- (instancetype)initWithCoder:(NSCoder *)aDecoder
+- (void)dealloc
 {
-    self = [super initWithCoder:aDecoder];
-    if (self)
-    {
-        BTBathroomManager *manager = [BTBathroomManager defaultManager];
-        [self configureWithBathrooms:[manager bathrooms]];
-    }
-    return self;
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
+- (void)awakeFromNib
+{
+    BTBathroomManager *manager = [BTBathroomManager defaultManager];
+    [self configureWithBathrooms:[manager bathrooms]];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(bathroomManagerDidUpdateStateNotification:)
+                                                 name:BTBathroomManagerDidUpdateStatusNotification
+                                               object:nil];
+}
+
+- (void)bathroomManagerDidUpdateStateNotification:(NSNotification *)notification
+{
+    BTBathroomManager *manager = [notification object];
+    [self configureWithBathrooms:[manager bathrooms]];
 }
 
 - (void)configureWithBathrooms:(NSArray *)bathrooms
@@ -84,18 +95,22 @@
 
 - (void)updateVacantView:(NSView *)vacantView isVacant:(BOOL)isVacant
 {
-    [NSAnimationContext beginGrouping];
-    [[NSAnimationContext currentContext] setDuration:1.0];
-    
+    CGFloat alpha = (isVacant) ? 1.0 : 0.0;
     if (isVacant)
     {
-        [[vacantView animator] setAlphaValue:1.0];
-    }
-    else
-    {
-        [[vacantView animator] setAlphaValue:0.0];
+        [vacantView setHidden:NO];
     }
     
+    [NSAnimationContext beginGrouping];
+    [[NSAnimationContext currentContext] setDuration:1.0];
+    [[NSAnimationContext currentContext] setCompletionHandler:^{
+        
+        [vacantView setHidden:!isVacant];
+        
+    }];
+    
+    [[vacantView animator] setAlphaValue:alpha];
+
     [NSAnimationContext endGrouping];
 }
 
@@ -122,19 +137,8 @@
 
 - (void)drawRect:(NSRect)dirtyRect
 {
-	[super drawRect:dirtyRect];
-    
-     // set view background color
-     if ([self selected])
-     {
-         [[NSColor selectedMenuItemColor] setFill];
-     }
-     else
-     {
-         [[NSColor clearColor] setFill];
-     }
-     
-     NSRectFill(dirtyRect);
+    [[self statusItem] drawStatusBarBackgroundInRect:dirtyRect
+                                       withHighlight:[self selected]];
 }
 
 @end

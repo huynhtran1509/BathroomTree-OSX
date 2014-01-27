@@ -55,7 +55,8 @@ NSString * const BTBathroomManagerDidUpdateStatusNotification = @"com.willowtree
 {
     if (![self isPolling])
     {
-        [self queueBathroomRequest];
+        [self setPolling:YES];
+        [self fetchBathrooms:nil];
     }
 }
 
