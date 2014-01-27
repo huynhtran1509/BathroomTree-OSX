@@ -23,17 +23,16 @@
                                     <action selector="close:" target="-1" id="oEZ-Xn-WQl"/>
                                 </connections>
                             </menuItem>
-                            <menuItem title="Notify When There's" id="XDu-Yv-FeX">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Notify When There's" id="V9p-Ap-M7Z">
+                            <menuItem title="Notify Me When" id="XDu-Yv-FeX">
+                                <menu key="submenu" title="Notify Me When" id="V9p-Ap-M7Z">
                                     <items>
-                                        <menuItem title="1 Bathroom Available" tag="1" id="3ad-EQ-V9w">
+                                        <menuItem title="1 Bathroom is Available" tag="1" id="3ad-EQ-V9w">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                         </menuItem>
-                                        <menuItem title="2 Bathrooms Available" tag="2" id="QsJ-0F-ckz">
+                                        <menuItem title="2 Bathrooms are Available" tag="2" id="QsJ-0F-ckz">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                         </menuItem>
-                                        <menuItem title="3 Bathrooms Available" tag="3" id="bga-De-DxY">
+                                        <menuItem title="3 Bathrooms are Available" tag="3" id="bga-De-DxY">
                                             <modifierMask key="keyEquivalentModifierMask"/>
                                         </menuItem>
                                     </items>
@@ -58,7 +57,7 @@
                             <menuItem isSeparatorItem="YES" id="149">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Quit Toilet Tree" id="136">
+                            <menuItem title="Quit BathroomTree" id="136">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="terminate:" target="-3" id="449"/>
@@ -71,13 +70,16 @@
         </menu>
         <customObject id="494" customClass="BTAppDelegate">
             <connections>
+                <outlet property="descriptionItem" destination="jIt-eT-bIM" id="PBl-Tc-Xp2"/>
                 <outlet property="menu" destination="81" id="WGH-bt-B3q"/>
                 <outlet property="notify1Item" destination="3ad-EQ-V9w" id="zFJ-yt-Z5Q"/>
                 <outlet property="notify2Item" destination="QsJ-0F-ckz" id="HvW-nD-049"/>
                 <outlet property="notify3Item" destination="bga-De-DxY" id="ABB-lX-JxP"/>
+                <outlet property="notifySubmenu" destination="XDu-Yv-FeX" id="mgz-Mv-4fH"/>
                 <outlet property="poll15Item" destination="uRY-yn-INW" id="Rxh-JH-ukb"/>
                 <outlet property="poll30Item" destination="CLG-qj-RdF" id="90s-Ue-iyO"/>
                 <outlet property="poll5Item" destination="5rQ-6O-BQo" id="k6j-p9-faX"/>
+                <outlet property="pollingSubmenu" destination="Aq3-Wd-mj5" id="Z2v-fi-OGn"/>
                 <outlet property="statusItemView" destination="9wc-SB-QX8" id="UZA-Nt-Ksx"/>
             </connections>
         </customObject>
@@ -85,38 +87,38 @@
             <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Rkd-hX-pay" userLabel="Toilet Occupied">
-                    <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="Rkd-hX-pay" userLabel="Leaf BG">
+                    <rect key="frame" x="0.0" y="1" width="22" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="tree_background" id="Vhr-aT-SoW"/>
                 </imageView>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="vGl-yb-49q" userLabel="Vacant 1">
-                    <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="vGl-yb-49q" userLabel="Leaf 1">
+                    <rect key="frame" x="0.0" y="1" width="22" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="bottom" imageScaling="proportionallyDown" image="leaf_1" id="3Cp-rc-fkO"/>
                 </imageView>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="qbJ-1b-Mbi" userLabel="Vacant 2">
-                    <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="qbJ-1b-Mbi" userLabel="Leaf 2">
+                    <rect key="frame" x="0.0" y="1" width="22" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="bottom" imageScaling="proportionallyDown" image="leaf_2" id="dnJ-eW-uLk"/>
                 </imageView>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="QiB-6m-Boe" userLabel="Vacant 3">
-                    <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="QiB-6m-Boe" userLabel="Leaf 3">
+                    <rect key="frame" x="0.0" y="1" width="22" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="bottom" imageScaling="proportionallyDown" image="leaf_3" id="C72-0I-s8e"/>
                 </imageView>
-                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="QTO-tV-9Sv" userLabel="Toilet Vacant">
-                    <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
+                <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="QTO-tV-9Sv" userLabel="Stem">
+                    <rect key="frame" x="0.0" y="1" width="22" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="tree_stem" id="yI5-x0-zTm"/>
                 </imageView>
             </subviews>
             <connections>
                 <outlet property="descriptionItem" destination="jIt-eT-bIM" id="28d-1J-DXa"/>
-                <outlet property="toilet1VacantView" destination="vGl-yb-49q" id="S6S-WZ-0eA"/>
-                <outlet property="toilet2VacantView" destination="qbJ-1b-Mbi" id="Z3D-fc-PLa"/>
-                <outlet property="toilet3VacantView" destination="QiB-6m-Boe" id="jqp-Mi-yA5"/>
-                <outlet property="toiletVacantView" destination="QTO-tV-9Sv" id="fHp-Ap-pUz"/>
+                <outlet property="leaf1View" destination="vGl-yb-49q" id="dA3-3L-LXk"/>
+                <outlet property="leaf2View" destination="qbJ-1b-Mbi" id="mEj-HB-Uwa"/>
+                <outlet property="leaf3View" destination="QiB-6m-Boe" id="Efy-0L-VDM"/>
+                <outlet property="stemView" destination="QTO-tV-9Sv" id="dfb-uT-QsI"/>
             </connections>
         </customView>
     </objects>

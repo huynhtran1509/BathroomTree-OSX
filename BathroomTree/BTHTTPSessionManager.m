@@ -26,7 +26,9 @@
 {
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
     
-    [self GET:@"bathrooms.json" parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+    NSString *path = @"bathroom/";
+    
+    [self GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         
         success(responseObject);
         

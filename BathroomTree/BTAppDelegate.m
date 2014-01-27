@@ -19,6 +19,9 @@
 @property (nonatomic, readwrite, strong) IBOutlet NSMenuItem *notify1Item;
 @property (nonatomic, readwrite, strong) IBOutlet NSMenuItem *notify2Item;
 @property (nonatomic, readwrite, strong) IBOutlet NSMenuItem *notify3Item;
+@property (nonatomic, readwrite, strong) IBOutlet NSMenuItem *descriptionItem;
+@property (nonatomic, readwrite, strong) IBOutlet NSMenuItem *pollingSubmenu;
+@property (nonatomic, readwrite, strong) IBOutlet NSMenuItem *notifySubmenu;
 @property (nonatomic, readwrite, strong) NSArray *notifyItems;
 
 @property (nonatomic, readwrite, strong) IBOutlet NSMenuItem *poll5Item;
@@ -38,7 +41,8 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-    NSURL *baseURL = [NSURL URLWithString:@"http://localhost:8000/"];
+    NSURL *baseURL = [NSURL URLWithString:@"http://sapling.willowtreeapps.com/"];
+    
     BTHTTPSessionManager *sessionManager = [[BTHTTPSessionManager alloc] initWithBaseURL:baseURL];
     [self setSessionManager:sessionManager];
     
@@ -88,7 +92,8 @@
         [self setNotifyItemsToZero];
         
         NSUserNotification *notification = [[NSUserNotification alloc] init];
-        notification.title = [BTStatusItemView bathroomDescriptionText:count];
+        notification.title = @"Vacant Bathroom!";
+        notification.informativeText = [BTStatusItemView bathroomDescriptionText:count];
         
         [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
     }
@@ -98,9 +103,9 @@
 
 - (void)failure:(NSError *)error
 {
-    
+    [[self statusItemView] configureWithObject:nil];
+    [[self descriptionItem] setTitle:@"Error Connecting to Server"];
 }
-
 
 - (void)setupStatusItem
 {

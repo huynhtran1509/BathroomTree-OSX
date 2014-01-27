@@ -10,16 +10,10 @@
 
 @interface BTStatusItemView () <NSMenuDelegate>
 
-@property (nonatomic, readwrite, weak) IBOutlet NSImageView *toiletVacantView;
-@property (nonatomic, readwrite, weak) IBOutlet NSImageView *toiletOccupiedView;
-
-@property (nonatomic, readwrite, weak) IBOutlet NSImageView *toilet1OccupiedView;
-@property (nonatomic, readwrite, weak) IBOutlet NSImageView *toilet2OccupiedView;
-@property (nonatomic, readwrite, weak) IBOutlet NSImageView *toilet3OccupiedView;
-
-@property (nonatomic, readwrite, weak) IBOutlet NSImageView *toilet1VacantView;
-@property (nonatomic, readwrite, weak) IBOutlet NSImageView *toilet2VacantView;
-@property (nonatomic, readwrite, weak) IBOutlet NSImageView *toilet3VacantView;
+@property (nonatomic, readwrite, weak) IBOutlet NSImageView *stemView;
+@property (nonatomic, readwrite, weak) IBOutlet NSImageView *leaf1View;
+@property (nonatomic, readwrite, weak) IBOutlet NSImageView *leaf2View;
+@property (nonatomic, readwrite, weak) IBOutlet NSImageView *leaf3View;
 @property (nonatomic, readwrite) BOOL selected;
 
 @end
@@ -52,11 +46,11 @@
     
     BOOL anyToiletVacant = toilet1Vacant | toilet2Vacant | toilet3Vacant;
     
-    [self updateVacantView:[self toilet1VacantView] occupiedView:[self toilet1OccupiedView] isVacant:toilet1Vacant];
-    [self updateVacantView:[self toilet2VacantView] occupiedView:[self toilet2OccupiedView] isVacant:toilet2Vacant];
-    [self updateVacantView:[self toilet3VacantView] occupiedView:[self toilet3OccupiedView] isVacant:toilet3Vacant];
+    [self updateVacantView:[self leaf1View] isVacant:toilet1Vacant];
+    [self updateVacantView:[self leaf2View] isVacant:toilet2Vacant];
+    [self updateVacantView:[self leaf3View] isVacant:toilet3Vacant];
     
-    [self updateVacantView:[self toiletVacantView] occupiedView:[self toiletOccupiedView] isVacant:anyToiletVacant];
+    [self updateVacantView:[self stemView] isVacant:anyToiletVacant];
     
     NSInteger count = toilet1Vacant + toilet2Vacant + toilet3Vacant;
     NSString *text = [BTStatusItemView bathroomDescriptionText:count];
@@ -67,32 +61,35 @@
 
 + (NSString *)bathroomDescriptionText:(NSInteger)count
 {
-    NSString *text = @"No Bathrooms Available";
+    NSString *text = @"No Bathrooms are Available";
     
     if (count == 1)
     {
-        text = @"1 Bathroom Available";
+        text = @"1 Bathroom is Available";
     }
     else if (count)
     {
-        text = [NSString stringWithFormat:@"%li Bathrooms Available", (long)count];
+        text = [NSString stringWithFormat:@"%li Bathrooms are Available", (long)count];
     }
     
     return text;
 }
 
-- (void)updateVacantView:(NSView *)vacantView occupiedView:(NSView *)occupiedView isVacant:(BOOL)isVacant
+- (void)updateVacantView:(NSView *)vacantView isVacant:(BOOL)isVacant
 {
+    [NSAnimationContext beginGrouping];
+    [[NSAnimationContext currentContext] setDuration:1.0];
+    
     if (isVacant)
     {
-        [vacantView setHidden:NO];
-        [occupiedView setHidden:YES];
+        [[vacantView animator] setAlphaValue:1.0];
     }
     else
     {
-        [vacantView setHidden:YES];
-        [occupiedView setHidden:NO];
+        [[vacantView animator] setAlphaValue:0.0];
     }
+    
+    [NSAnimationContext endGrouping];
 }
 
 - (void)mouseDown:(NSEvent *)theEvent
@@ -119,21 +116,6 @@
 - (void)drawRect:(NSRect)dirtyRect
 {
 	[super drawRect:dirtyRect];
-    
-    
-    /*
-    // set view background color
-    if ([self selected])
-    {
-        [[NSColor selectedMenuItemColor] setFill];
-    }
-    else
-    {
-        [[NSColor clearColor] setFill];
-    }
-    
-    NSRectFill(dirtyRect);
-     */
 }
 
 @end
