@@ -13,11 +13,12 @@
 
 - (id)initWithBaseURL:(NSURL *)url
 {
-    self = [super initWithBaseURL:url];
+    self = [super init];
     
     if (self)
     {
-        [self setResponseSerializer:[AFJSONResponseSerializer serializer]];
+        [self setBaseURL:url];
+        [self setQueue:[NSOperationQueue new]];
     }
     
     return self;
@@ -33,14 +34,23 @@
     NSString *path = @"bathrooms.json";
 #endif
     
-    [self GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
+    path = [[[self baseURL] absoluteString] stringByAppendingString:path];
+    
+    NSURL *url = [NSURL URLWithString:path];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    AFHTTPRequestOperation *operation = [[AFHTTPRequestOperation alloc] initWithRequest:request];
+    [operation setResponseSerializer:[AFJSONResponseSerializer serializer]];
+    
+    [operation setCompletionBlockWithSuccess:^(AFHTTPRequestOperation *operation, id responseObject) {
         
         success(responseObject);
         
-    } failure:^(NSURLSessionDataTask *task, NSError *error) {
+    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
         
         failure(error);
-        
     }];
+    
+    [[self queue] addOperation:operation];
 }
 @end
