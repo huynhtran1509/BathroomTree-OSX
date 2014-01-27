@@ -17,7 +17,7 @@
                     <modifierMask key="keyEquivalentModifierMask"/>
                     <menu key="submenu" title="Status Menu" id="81">
                         <items>
-                            <menuItem title="No Bathrooms Available" id="jIt-eT-bIM">
+                            <menuItem title="Error Connecting to Server" id="jIt-eT-bIM">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                                 <connections>
                                     <action selector="close:" target="-1" id="oEZ-Xn-WQl"/>
@@ -26,15 +26,9 @@
                             <menuItem title="Notify Me When" id="XDu-Yv-FeX">
                                 <menu key="submenu" title="Notify Me When" id="V9p-Ap-M7Z">
                                     <items>
-                                        <menuItem title="1 Bathroom is Available" tag="1" id="3ad-EQ-V9w">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem title="2 Bathrooms are Available" tag="2" id="QsJ-0F-ckz">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem title="3 Bathrooms are Available" tag="3" id="bga-De-DxY">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
+                                        <menuItem title="1 Bathroom is Available" tag="1" keyEquivalent="1" id="3ad-EQ-V9w"/>
+                                        <menuItem title="2 Bathrooms are Available" tag="2" keyEquivalent="2" id="QsJ-0F-ckz"/>
+                                        <menuItem title="3 Bathrooms are Available" tag="3" keyEquivalent="3" id="bga-De-DxY"/>
                                     </items>
                                 </menu>
                             </menuItem>
@@ -57,8 +51,7 @@
                             <menuItem isSeparatorItem="YES" id="149">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
-                            <menuItem title="Quit BathroomTree" id="136">
-                                <modifierMask key="keyEquivalentModifierMask"/>
+                            <menuItem title="Quit BathroomTree" keyEquivalent="q" id="136">
                                 <connections>
                                     <action selector="terminate:" target="-3" id="449"/>
                                 </connections>

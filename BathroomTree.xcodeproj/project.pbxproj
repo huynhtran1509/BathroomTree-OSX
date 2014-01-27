@@ -19,8 +19,6 @@
 		8724BF4F18942FC800A314F7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8724BF2E18942FC800A314F7 /* Cocoa.framework */; };
 		8724BF5718942FC800A314F7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8724BF5518942FC800A314F7 /* InfoPlist.strings */; };
 		8724BF5918942FC800A314F7 /* BathroomTreeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8724BF5818942FC800A314F7 /* BathroomTreeTests.m */; };
-		87689FB618948971005984F3 /* BTStatusPopupView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87689FB518948971005984F3 /* BTStatusPopupView.m */; };
-		87689FB9189489E3005984F3 /* BTViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 87689FB8189489E3005984F3 /* BTViewController.m */; };
 		87689FC01894CE60005984F3 /* BTStatusItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87689FBF1894CE60005984F3 /* BTStatusItemView.m */; };
 		87689FC31895930C005984F3 /* BTHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 87689FC21895930C005984F3 /* BTHTTPSessionManager.m */; };
 /* End PBXBuildFile section */
@@ -57,10 +55,6 @@
 		8724BF5418942FC800A314F7 /* BathroomTreeTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "BathroomTreeTests-Info.plist"; sourceTree = "<group>"; };
 		8724BF5618942FC800A314F7 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		8724BF5818942FC800A314F7 /* BathroomTreeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BathroomTreeTests.m; sourceTree = "<group>"; };
-		87689FB418948971005984F3 /* BTStatusPopupView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTStatusPopupView.h; sourceTree = "<group>"; };
-		87689FB518948971005984F3 /* BTStatusPopupView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTStatusPopupView.m; sourceTree = "<group>"; };
-		87689FB7189489E3005984F3 /* BTViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTViewController.h; sourceTree = "<group>"; };
-		87689FB8189489E3005984F3 /* BTViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTViewController.m; sourceTree = "<group>"; };
 		87689FBE1894CE60005984F3 /* BTStatusItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTStatusItemView.h; sourceTree = "<group>"; };
 		87689FBF1894CE60005984F3 /* BTStatusItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTStatusItemView.m; sourceTree = "<group>"; };
 		87689FC11895930C005984F3 /* BTHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTHTTPSessionManager.h; sourceTree = "<group>"; };
@@ -137,10 +131,6 @@
 				8724BF4118942FC800A314F7 /* BTAppDelegate.m */,
 				87689FC11895930C005984F3 /* BTHTTPSessionManager.h */,
 				87689FC21895930C005984F3 /* BTHTTPSessionManager.m */,
-				87689FB418948971005984F3 /* BTStatusPopupView.h */,
-				87689FB518948971005984F3 /* BTStatusPopupView.m */,
-				87689FB7189489E3005984F3 /* BTViewController.h */,
-				87689FB8189489E3005984F3 /* BTViewController.m */,
 				87689FBE1894CE60005984F3 /* BTStatusItemView.h */,
 				87689FBF1894CE60005984F3 /* BTStatusItemView.m */,
 				8724BF4318942FC800A314F7 /* MainMenu.xib */,
@@ -316,10 +306,8 @@
 			files = (
 				87689FC31895930C005984F3 /* BTHTTPSessionManager.m in Sources */,
 				87689FC01894CE60005984F3 /* BTStatusItemView.m in Sources */,
-				87689FB9189489E3005984F3 /* BTViewController.m in Sources */,
 				8724BF4218942FC800A314F7 /* BTAppDelegate.m in Sources */,
 				8724BF3B18942FC800A314F7 /* main.m in Sources */,
-				87689FB618948971005984F3 /* BTStatusPopupView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -454,6 +442,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BathroomTree/BathroomTree-Prefix.pch";
 				INFOPLIST_FILE = "BathroomTree/BathroomTree-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};
@@ -468,6 +457,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "BathroomTree/BathroomTree-Prefix.pch";
 				INFOPLIST_FILE = "BathroomTree/BathroomTree-Info.plist";
+				MACOSX_DEPLOYMENT_TARGET = 10.8;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				WRAPPER_EXTENSION = app;
 			};

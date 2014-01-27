@@ -1,5 +1,14 @@
-{
-    "1" : true,
-    "2" : true,
-    "3" : true
-}
+[
+    {
+        "available": false,
+        "room": 1
+    },
+    {
+        "available": false,
+        "room": 2
+    },
+    {
+        "available": true,
+        "room": 3
+    }
+]

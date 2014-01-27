@@ -7,6 +7,7 @@
 //
 
 #import <Cocoa/Cocoa.h>
+//#define DEBUG_SERVER
 
 @class BTStatusItemView;
 

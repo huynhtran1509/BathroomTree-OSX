@@ -7,6 +7,7 @@
 //
 
 #import "BTHTTPSessionManager.h"
+#import "BTAppDelegate.h"
 
 @implementation BTHTTPSessionManager
 
@@ -26,7 +27,11 @@
 {
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
     
+#ifndef DEBUG_SERVER
     NSString *path = @"bathroom/";
+#else
+    NSString *path = @"bathrooms.json";
+#endif
     
     [self GET:path parameters:nil success:^(NSURLSessionDataTask *task, id responseObject) {
         

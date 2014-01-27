@@ -7,7 +7,6 @@
 //
 
 #import "BTAppDelegate.h"
-#import "BTViewController.h"
 #import "BTStatusItemView.h"
 #import "BTHTTPSessionManager.h"
 
@@ -41,7 +40,11 @@
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
+#ifndef DEBUG_SERVER
     NSURL *baseURL = [NSURL URLWithString:@"http://sapling.willowtreeapps.com/"];
+#else
+    NSURL *baseURL = [NSURL URLWithString:@"http://localhost:8000/"];
+#endif
     
     BTHTTPSessionManager *sessionManager = [[BTHTTPSessionManager alloc] initWithBaseURL:baseURL];
     [self setSessionManager:sessionManager];
@@ -81,9 +84,17 @@
 
 - (void)success:(id)response
 {
-    BOOL toilet1Vacant = [response[@"1"] boolValue];
-    BOOL toilet2Vacant = [response[@"2"] boolValue];
-    BOOL toilet3Vacant = [response[@"3"] boolValue];
+    BOOL toilet1Vacant = NO;
+    BOOL toilet2Vacant = NO;
+    BOOL toilet3Vacant = NO;
+    
+    if ([response count])
+    {
+        toilet1Vacant = [response[0][@"available"] boolValue];
+        toilet2Vacant = [response[1][@"available"] boolValue];
+        toilet3Vacant = [response[2][@"available"] boolValue];
+    }
+    
     NSInteger count = toilet1Vacant + toilet2Vacant + toilet3Vacant;
     
     if ([self notifyCount] && count >= [self notifyCount])

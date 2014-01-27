@@ -40,9 +40,16 @@
 
 - (void)configureWithObject:(id)object
 {
-    BOOL toilet1Vacant = [object[@"1"] boolValue];
-    BOOL toilet2Vacant = [object[@"2"] boolValue];
-    BOOL toilet3Vacant = [object[@"3"] boolValue];
+    BOOL toilet1Vacant = NO;
+    BOOL toilet2Vacant = NO;
+    BOOL toilet3Vacant = NO;
+    
+    if ([object count])
+    {
+        toilet1Vacant = [object[0][@"available"] boolValue];
+        toilet2Vacant = [object[1][@"available"] boolValue];
+        toilet3Vacant = [object[2][@"available"] boolValue];
+    }
     
     BOOL anyToiletVacant = toilet1Vacant | toilet2Vacant | toilet3Vacant;
     
