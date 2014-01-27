@@ -75,6 +75,7 @@
             notification.title = @"Vacant Bathroom!";
             notification.informativeText = [BTStatusItemView bathroomDescriptionText:[availableBathrooms count]];
             [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
+            [defaults setNotificationPreference:BTNotificationPreferenceNone];
             [self setNotifyItemsToZero];
         }
     }
@@ -125,7 +126,6 @@
 
 - (void)setNotifyItemsToZero
 {
-    [[NSUserDefaults standardUserDefaults] setNotificationPreference:BTNotificationPreferenceNone];
     for (NSMenuItem *item in [self notifyItems])
     {
         [item setState:NSOffState];

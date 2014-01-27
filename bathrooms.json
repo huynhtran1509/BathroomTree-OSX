@@ -4,7 +4,7 @@
         "room": 1
     },
     {
-        "available": false,
+        "available": true,
         "room": 2
     },
     {
