@@ -20,7 +20,9 @@
 		8724BF5718942FC800A314F7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8724BF5518942FC800A314F7 /* InfoPlist.strings */; };
 		8724BF5918942FC800A314F7 /* BathroomTreeTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 8724BF5818942FC800A314F7 /* BathroomTreeTests.m */; };
 		87689FC01894CE60005984F3 /* BTStatusItemView.m in Sources */ = {isa = PBXBuildFile; fileRef = 87689FBF1894CE60005984F3 /* BTStatusItemView.m */; };
-		87689FC31895930C005984F3 /* BTHTTPSessionManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 87689FC21895930C005984F3 /* BTHTTPSessionManager.m */; };
+		87689FC31895930C005984F3 /* BTBathroomManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 87689FC21895930C005984F3 /* BTBathroomManager.m */; };
+		BDF56F441896EA8D00F54FC4 /* BTBathroom.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF56F431896EA8D00F54FC4 /* BTBathroom.m */; };
+		BDF56F471896F03300F54FC4 /* NSUserDefaults+BathroomTree.m in Sources */ = {isa = PBXBuildFile; fileRef = BDF56F461896F03300F54FC4 /* NSUserDefaults+BathroomTree.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -57,8 +59,12 @@
 		8724BF5818942FC800A314F7 /* BathroomTreeTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = BathroomTreeTests.m; sourceTree = "<group>"; };
 		87689FBE1894CE60005984F3 /* BTStatusItemView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTStatusItemView.h; sourceTree = "<group>"; };
 		87689FBF1894CE60005984F3 /* BTStatusItemView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTStatusItemView.m; sourceTree = "<group>"; };
-		87689FC11895930C005984F3 /* BTHTTPSessionManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTHTTPSessionManager.h; sourceTree = "<group>"; };
-		87689FC21895930C005984F3 /* BTHTTPSessionManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTHTTPSessionManager.m; sourceTree = "<group>"; };
+		87689FC11895930C005984F3 /* BTBathroomManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTBathroomManager.h; sourceTree = "<group>"; };
+		87689FC21895930C005984F3 /* BTBathroomManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTBathroomManager.m; sourceTree = "<group>"; };
+		BDF56F421896EA8D00F54FC4 /* BTBathroom.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BTBathroom.h; sourceTree = "<group>"; };
+		BDF56F431896EA8D00F54FC4 /* BTBathroom.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BTBathroom.m; sourceTree = "<group>"; };
+		BDF56F451896F03300F54FC4 /* NSUserDefaults+BathroomTree.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSUserDefaults+BathroomTree.h"; sourceTree = "<group>"; };
+		BDF56F461896F03300F54FC4 /* NSUserDefaults+BathroomTree.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSUserDefaults+BathroomTree.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -129,10 +135,14 @@
 			children = (
 				8724BF4018942FC800A314F7 /* BTAppDelegate.h */,
 				8724BF4118942FC800A314F7 /* BTAppDelegate.m */,
-				87689FC11895930C005984F3 /* BTHTTPSessionManager.h */,
-				87689FC21895930C005984F3 /* BTHTTPSessionManager.m */,
+				87689FC11895930C005984F3 /* BTBathroomManager.h */,
+				87689FC21895930C005984F3 /* BTBathroomManager.m */,
 				87689FBE1894CE60005984F3 /* BTStatusItemView.h */,
 				87689FBF1894CE60005984F3 /* BTStatusItemView.m */,
+				BDF56F421896EA8D00F54FC4 /* BTBathroom.h */,
+				BDF56F431896EA8D00F54FC4 /* BTBathroom.m */,
+				BDF56F451896F03300F54FC4 /* NSUserDefaults+BathroomTree.h */,
+				BDF56F461896F03300F54FC4 /* NSUserDefaults+BathroomTree.m */,
 				8724BF4318942FC800A314F7 /* MainMenu.xib */,
 				8724BF4618942FC800A314F7 /* Images.xcassets */,
 				8724BF3518942FC800A314F7 /* Supporting Files */,
@@ -304,10 +314,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				87689FC31895930C005984F3 /* BTHTTPSessionManager.m in Sources */,
+				87689FC31895930C005984F3 /* BTBathroomManager.m in Sources */,
 				87689FC01894CE60005984F3 /* BTStatusItemView.m in Sources */,
 				8724BF4218942FC800A314F7 /* BTAppDelegate.m in Sources */,
+				BDF56F441896EA8D00F54FC4 /* BTBathroom.m in Sources */,
 				8724BF3B18942FC800A314F7 /* main.m in Sources */,
+				BDF56F471896F03300F54FC4 /* NSUserDefaults+BathroomTree.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -7,6 +7,8 @@
 //
 
 #import "BTStatusItemView.h"
+#import "BTBathroomManager.h"
+#import "BTBathroom.h"
 
 @interface BTStatusItemView () <NSMenuDelegate>
 
@@ -20,50 +22,48 @@
 
 @implementation BTStatusItemView
 
-- (id)initWithFrame:(NSRect)frameRect
+- (instancetype)initWithCoder:(NSCoder *)aDecoder
 {
-    self = [super initWithFrame:frameRect];
-
+    self = [super initWithCoder:aDecoder];
     if (self)
     {
-        
-     
+        BTBathroomManager *manager = [BTBathroomManager defaultManager];
+        [self configureWithBathrooms:[manager bathrooms]];
     }
-    
-    return  self;
+    return self;
 }
 
-- (void)awakeFromNib
+- (void)configureWithBathrooms:(NSArray *)bathrooms
 {
-    [self configureWithObject:nil];
-}
-
-- (void)configureWithObject:(id)object
-{
-    BOOL toilet1Vacant = NO;
-    BOOL toilet2Vacant = NO;
-    BOOL toilet3Vacant = NO;
-    
-    if ([object count])
+    if ([bathrooms count] != 3)
     {
-        toilet1Vacant = [object[0][@"available"] boolValue];
-        toilet2Vacant = [object[1][@"available"] boolValue];
-        toilet3Vacant = [object[2][@"available"] boolValue];
+        [self updateVacantView:[self leaf1View] isVacant:NO];
+        [self updateVacantView:[self leaf2View] isVacant:NO];
+        [self updateVacantView:[self leaf3View] isVacant:NO];
+        [self updateVacantView:[self stemView] isVacant:NO];
+        
+        NSString *text = [BTStatusItemView bathroomDescriptionText:0];
+        [[self descriptionItem] setTitle:text];
+        [self setToolTip:text];
     }
-    
-    BOOL anyToiletVacant = toilet1Vacant | toilet2Vacant | toilet3Vacant;
-    
-    [self updateVacantView:[self leaf1View] isVacant:toilet1Vacant];
-    [self updateVacantView:[self leaf2View] isVacant:toilet2Vacant];
-    [self updateVacantView:[self leaf3View] isVacant:toilet3Vacant];
-    
-    [self updateVacantView:[self stemView] isVacant:anyToiletVacant];
-    
-    NSInteger count = toilet1Vacant + toilet2Vacant + toilet3Vacant;
-    NSString *text = [BTStatusItemView bathroomDescriptionText:count];
-    
-    [[self descriptionItem] setTitle:text];
-    [self setToolTip:text];
+    else
+    {
+        [self updateVacantView:[self leaf1View]
+                      isVacant:[bathrooms[0] isAvailable]];
+        [self updateVacantView:[self leaf2View]
+                      isVacant:[bathrooms[1] isAvailable]];
+        [self updateVacantView:[self leaf3View]
+                      isVacant:[bathrooms[2] isAvailable]];
+        
+        NSPredicate *predicate = [NSPredicate predicateWithFormat:@"available = %@", @(YES)];
+        NSArray *availableBathrooms = [bathrooms filteredArrayUsingPredicate:predicate];
+        [self updateVacantView:[self stemView]
+                      isVacant:([availableBathrooms count])];
+        
+        NSString *text = [BTStatusItemView bathroomDescriptionText:([availableBathrooms count])];
+        [[self descriptionItem] setTitle:text];
+        [self setToolTip:text];
+    }
 }
 
 + (NSString *)bathroomDescriptionText:(NSInteger)count
@@ -123,6 +123,18 @@
 - (void)drawRect:(NSRect)dirtyRect
 {
 	[super drawRect:dirtyRect];
+    
+     // set view background color
+     if ([self selected])
+     {
+         [[NSColor selectedMenuItemColor] setFill];
+     }
+     else
+     {
+         [[NSColor clearColor] setFill];
+     }
+     
+     NSRectFill(dirtyRect);
 }
 
 @end

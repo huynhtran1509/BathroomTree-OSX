@@ -7,8 +7,9 @@
 //
 
 #import "BTAppDelegate.h"
+#import "NSUserDefaults+BathroomTree.h"
 #import "BTStatusItemView.h"
-#import "BTHTTPSessionManager.h"
+#import "BTBathroomManager.h"
 
 @interface BTAppDelegate ()
 
@@ -28,94 +29,58 @@
 @property (nonatomic, readwrite, strong) IBOutlet NSMenuItem *poll30Item;
 @property (nonatomic, readwrite, strong) NSArray *pollItems;
 
-@property (nonatomic, readwrite, strong) BTHTTPSessionManager *sessionManager;
-@property (nonatomic, readwrite, strong) NSTimer *timer;
-@property (nonatomic, readwrite) NSInteger notifyCount;
-@property (nonatomic, readwrite) NSTimeInterval pollSpeed;
-
-
 @end
 
 @implementation BTAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
-#ifndef DEBUG_SERVER
-    NSURL *baseURL = [NSURL URLWithString:@"http://sapling.willowtreeapps.com/"];
-#else
-    NSURL *baseURL = [NSURL URLWithString:@"http://localhost:8000/"];
-#endif
-    
-    BTHTTPSessionManager *sessionManager = [[BTHTTPSessionManager alloc] initWithBaseURL:baseURL];
-    [self setSessionManager:sessionManager];
-    
+    [[NSUserDefaults standardUserDefaults] registerApplicationDefaults];
     [self setupPollItems];
     [self setupStatusItem];
     [self setupMenuItemActions];
     
-    [self pollItemSelected:[self poll5Item]];
-    [self fetchBathrooms];
-}
-
-- (void)queueBathroomRequest
-{
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:[self pollSpeed]
-                                                      target:self
-                                                    selector:@selector(fetchBathrooms)
-                                                    userInfo:nil
-                                                     repeats:NO];
-    [self setTimer:timer];
-}
-
-- (void)fetchBathrooms
-{
-    [[self sessionManager] getBathrooms:^(id response) {
-        
-        [self success:response];
-        [self queueBathroomRequest];
-        
-    } failure:^(NSError *error) {
-        
-        [self failure:error];
-        [self queueBathroomRequest];
-        
-    }];
-}
-
-- (void)success:(id)response
-{
-    BOOL toilet1Vacant = NO;
-    BOOL toilet2Vacant = NO;
-    BOOL toilet3Vacant = NO;
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(bathroomManagerDidUpdateStateNotification:)
+                                                 name:BTBathroomManagerDidUpdateStatusNotification
+                                               object:nil];
     
-    if ([response count])
+    [[BTBathroomManager defaultManager] startPolling];
+}
+
+- (void)applicationWillTerminate:(NSNotification *)notification
+{
+    [[BTBathroomManager defaultManager] stopPolling];
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSUserDefaults standardUserDefaults] synchronize];
+}
+
+- (void)bathroomManagerDidUpdateStateNotification:(NSNotification *)notification
+{
+    BTBathroomManager *manager = [notification object];
+    
+    if ([manager error])
     {
-        toilet1Vacant = [response[0][@"available"] boolValue];
-        toilet2Vacant = [response[1][@"available"] boolValue];
-        toilet3Vacant = [response[2][@"available"] boolValue];
+        [[self statusItemView] configureWithBathrooms:nil];
+        [[self descriptionItem] setTitle:@"Error Connecting to Server"];
     }
-    
-    NSInteger count = toilet1Vacant + toilet2Vacant + toilet3Vacant;
-    
-    if ([self notifyCount] && count >= [self notifyCount])
+    else
     {
-        [self setNotifyCount:0];
-        [self setNotifyItemsToZero];
+        [[self statusItemView] configureWithBathrooms:[manager bathrooms]];
         
-        NSUserNotification *notification = [[NSUserNotification alloc] init];
-        notification.title = @"Vacant Bathroom!";
-        notification.informativeText = [BTStatusItemView bathroomDescriptionText:count];
-        
-        [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
+        NSArray *availableBathrooms = [manager availableBathrooms];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        if ([availableBathrooms count] &&
+            [defaults notificationPreference] != BTNotificationPreferenceNone &&
+            [availableBathrooms count] >= [defaults notificationPreference])
+        {
+            NSUserNotification *notification = [[NSUserNotification alloc] init];
+            notification.title = @"Vacant Bathroom!";
+            notification.informativeText = [BTStatusItemView bathroomDescriptionText:[availableBathrooms count]];
+            [[NSUserNotificationCenter defaultUserNotificationCenter] deliverNotification:notification];
+            [self setNotifyItemsToZero];
+        }
     }
-    
-    [[self statusItemView] configureWithObject:response];
-}
-
-- (void)failure:(NSError *)error
-{
-    [[self statusItemView] configureWithObject:nil];
-    [[self descriptionItem] setTitle:@"Error Connecting to Server"];
 }
 
 - (void)setupStatusItem
@@ -131,10 +96,15 @@
 
 - (void)setupPollItems
 {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [self setPollItems:@[[self poll5Item], [self poll15Item], [self poll30Item]]];
     
     for (NSMenuItem *item in [self pollItems])
     {
+        if ([item tag] == (NSInteger)[defaults pollingInterval])
+        {
+            [item setState:NSOnState];
+        }
         [item setTarget:self];
         [item setAction:@selector(pollItemSelected:)];
     }
@@ -142,10 +112,15 @@
 
 - (void)setupMenuItemActions
 {
+    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
     [self setNotifyItems:@[[self notify1Item], [self notify2Item], [self notify3Item]]];
     
     for (NSMenuItem *item in [self notifyItems])
     {
+        if ([item tag] == (NSInteger)[defaults notificationPreference])
+        {
+            [item setState:NSOnState];
+        }
         [item setTarget:self];
         [item setAction:@selector(notifyMe:)];
     }
@@ -153,6 +128,7 @@
 
 - (void)setNotifyItemsToZero
 {
+    [[NSUserDefaults standardUserDefaults] setNotificationPreference:BTNotificationPreferenceNone];
     for (NSMenuItem *item in [self notifyItems])
     {
         [item setState:NSOffState];
@@ -170,7 +146,7 @@
             [item setState:NSOffState];
         }
         [menuItem setState:NSOnState];
-        [self setPollSpeed:[menuItem tag]];
+        [[BTBathroomManager defaultManager] setPollingInterval:[menuItem tag]];
     }
 }
 
@@ -180,7 +156,8 @@
     
     if (oldState == NSOffState)
     {
-        [self setNotifyCount:[menuItem tag]];
+        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
+        [defaults setNotificationPreference:[menuItem tag]];
         [self setNotifyItemsToZero];
         [menuItem setState:NSOnState];
     }

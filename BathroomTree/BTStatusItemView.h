@@ -13,7 +13,7 @@
 @property (nonatomic, readwrite, strong) NSStatusItem *statusItem;
 @property (nonatomic, readwrite, strong) IBOutlet NSMenuItem *descriptionItem;
 
-- (void)configureWithObject:(id)object;
+- (void)configureWithBathrooms:(NSArray *)bathrooms;
 + (NSString *)bathroomDescriptionText:(NSInteger)count;
 
 @end
