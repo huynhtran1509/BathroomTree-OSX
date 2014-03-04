@@ -1,10 +1,10 @@
 [
     {
-        "available": true,
+        "available": false,
         "room": 1
     },
     {
-        "available": true,
+        "available": false,
         "room": 2
     },
     {

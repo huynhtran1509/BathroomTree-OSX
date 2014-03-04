@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13B42" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1080" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
@@ -23,6 +23,9 @@
                                 <connections>
                                     <action selector="close:" target="-1" id="oEZ-Xn-WQl"/>
                                 </connections>
+                            </menuItem>
+                            <menuItem title="Version Number" id="tYW-pf-9bW">
+                                <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem title="Notify Me When" id="XDu-Yv-FeX">
                                 <menu key="submenu" title="Notify Me When" id="V9p-Ap-M7Z">
@@ -49,6 +52,9 @@
                                     </items>
                                 </menu>
                             </menuItem>
+                            <menuItem title="Start BathroomTree at Login" tag="1" id="Ztc-uB-eoq">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
                             <menuItem isSeparatorItem="YES" id="149">
                                 <modifierMask key="keyEquivalentModifierMask" command="YES"/>
                             </menuItem>
@@ -74,7 +80,9 @@
                 <outlet property="poll30Item" destination="CLG-qj-RdF" id="90s-Ue-iyO"/>
                 <outlet property="poll5Item" destination="5rQ-6O-BQo" id="k6j-p9-faX"/>
                 <outlet property="pollingSubmenu" destination="Aq3-Wd-mj5" id="Z2v-fi-OGn"/>
+                <outlet property="startLoginItem" destination="Ztc-uB-eoq" id="hDM-uM-paL"/>
                 <outlet property="statusItemView" destination="9wc-SB-QX8" id="UZA-Nt-Ksx"/>
+                <outlet property="versionItem" destination="tYW-pf-9bW" id="RJq-dk-GPM"/>
             </connections>
         </customObject>
         <customView id="9wc-SB-QX8" customClass="BTStatusItemView">
