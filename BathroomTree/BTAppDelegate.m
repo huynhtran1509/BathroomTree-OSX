@@ -38,7 +38,6 @@
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification
 {
     [[NSUserDefaults standardUserDefaults] registerApplicationDefaults];
-    [self setupPollItems];
     [self setupStatusItem];
     [self setupMenuItemActions];
     [self setupLoginItemAction];
@@ -49,12 +48,11 @@
                                                  name:BTBathroomManagerDidUpdateStatusNotification
                                                object:nil];
     
-    [[BTBathroomManager defaultManager] startPolling];
+    [[BTBathroomManager defaultManager] getBathrooms];
 }
 
 - (void)applicationWillTerminate:(NSNotification *)notification
 {
-    [[BTBathroomManager defaultManager] stopPolling];
     [[NSNotificationCenter defaultCenter] removeObserver:self];
     [[NSUserDefaults standardUserDefaults] synchronize];
 }
@@ -132,22 +130,6 @@
     [self setStatusItem:statusItem];
 }
 
-- (void)setupPollItems
-{
-    NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-    [self setPollItems:@[[self poll5Item], [self poll15Item], [self poll30Item]]];
-    
-    for (NSMenuItem *item in [self pollItems])
-    {
-        if ([item tag] == (NSInteger)[defaults pollingInterval])
-        {
-            [item setState:NSOnState];
-        }
-        [item setTarget:self];
-        [item setAction:@selector(pollItemSelected:)];
-    }
-}
-
 - (void)setupMenuItemActions
 {
     NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
@@ -169,21 +151,6 @@
     for (NSMenuItem *item in [self notifyItems])
     {
         [item setState:NSOffState];
-    }
-}
-
-- (void)pollItemSelected:(NSMenuItem *)menuItem
-{
-    NSInteger oldState = [menuItem state];
-    
-    if (oldState == NSOffState)
-    {
-        for (NSMenuItem *item in [self pollItems])
-        {
-            [item setState:NSOffState];
-        }
-        [menuItem setState:NSOnState];
-        [[BTBathroomManager defaultManager] setPollingInterval:[menuItem tag]];
     }
 }
 

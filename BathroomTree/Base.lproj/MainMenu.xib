@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="4514" systemVersion="13C64" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1080" identifier="macosx"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="4514"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6245"/>
     </dependencies>
     <objects>
         <customObject id="-2" userLabel="File's Owner" customClass="NSApplication">
@@ -11,7 +11,7 @@
             </connections>
         </customObject>
         <customObject id="-1" userLabel="First Responder" customClass="FirstResponder"/>
-        <customObject id="-3" userLabel="Application"/>
+        <customObject id="-3" userLabel="Application" customClass="NSObject"/>
         <menu title="AMainMenu" systemMenu="main" id="29">
             <items>
                 <menuItem title="Status Menu" id="83">
@@ -33,22 +33,6 @@
                                         <menuItem title="1 Bathroom is Available" tag="1" keyEquivalent="1" id="3ad-EQ-V9w"/>
                                         <menuItem title="2 Bathrooms are Available" tag="2" keyEquivalent="2" id="QsJ-0F-ckz"/>
                                         <menuItem title="3 Bathrooms are Available" tag="3" keyEquivalent="3" id="bga-De-DxY"/>
-                                    </items>
-                                </menu>
-                            </menuItem>
-                            <menuItem title="Polling Speed" id="Aq3-Wd-mj5">
-                                <modifierMask key="keyEquivalentModifierMask"/>
-                                <menu key="submenu" title="Polling Speed" id="2j0-Z7-Upu">
-                                    <items>
-                                        <menuItem title="5 seconds" tag="5" id="5rQ-6O-BQo">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem title="15 seconds" tag="15" id="uRY-yn-INW">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
-                                        <menuItem title="30 seconds" tag="30" id="CLG-qj-RdF">
-                                            <modifierMask key="keyEquivalentModifierMask"/>
-                                        </menuItem>
                                     </items>
                                 </menu>
                             </menuItem>
@@ -76,10 +60,6 @@
                 <outlet property="notify2Item" destination="QsJ-0F-ckz" id="HvW-nD-049"/>
                 <outlet property="notify3Item" destination="bga-De-DxY" id="ABB-lX-JxP"/>
                 <outlet property="notifySubmenu" destination="XDu-Yv-FeX" id="mgz-Mv-4fH"/>
-                <outlet property="poll15Item" destination="uRY-yn-INW" id="Rxh-JH-ukb"/>
-                <outlet property="poll30Item" destination="CLG-qj-RdF" id="90s-Ue-iyO"/>
-                <outlet property="poll5Item" destination="5rQ-6O-BQo" id="k6j-p9-faX"/>
-                <outlet property="pollingSubmenu" destination="Aq3-Wd-mj5" id="Z2v-fi-OGn"/>
                 <outlet property="startLoginItem" destination="Ztc-uB-eoq" id="hDM-uM-paL"/>
                 <outlet property="statusItemView" destination="9wc-SB-QX8" id="UZA-Nt-Ksx"/>
                 <outlet property="versionItem" destination="tYW-pf-9bW" id="RJq-dk-GPM"/>

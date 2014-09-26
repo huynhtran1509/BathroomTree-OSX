@@ -12,18 +12,14 @@ FOUNDATION_EXPORT NSString * const BTBathroomManagerDidUpdateStatusNotification;
 
 @class BTBathroom;
 
-@interface BTBathroomManager : AFHTTPRequestOperationManager
+@interface BTBathroomManager : NSObject
 
-@property (nonatomic, assign) NSTimeInterval pollingInterval;
 @property (nonatomic, strong, readonly) NSArray *bathrooms;
 @property (nonatomic, strong, readonly) NSArray *availableBathrooms;
 @property (nonatomic, strong, readonly) NSError *error;
 
 + (instancetype)defaultManager;
 
-- (void)startPolling;
-- (void)stopPolling;
-
-- (void)getBathrooms:(void(^)(id response))success failure:(void(^)(NSError *error))failure;
+- (void)getBathrooms;
 
 @end

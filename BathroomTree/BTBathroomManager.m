@@ -13,11 +13,12 @@
 
 NSString * const BTBathroomManagerDidUpdateStatusNotification = @"com.willowtreeapps.ManagerDidUpdateStatus";
 
-@interface BTBathroomManager ()
+@interface BTBathroomManager () <NSURLConnectionDataDelegate, NSURLConnectionDelegate>
 
 @property (nonatomic, readwrite, strong) NSTimer *pollingTimer;
 @property (nonatomic, readwrite, getter = isPolling) BOOL polling;
 @property (nonatomic, strong, readwrite) NSArray *bathrooms;
+@property (nonatomic, strong, readwrite) NSURLConnection *urlConnection;
 @property (nonatomic, strong, readwrite) NSError *error;
 
 @end
@@ -26,14 +27,8 @@ NSString * const BTBathroomManagerDidUpdateStatusNotification = @"com.willowtree
 
 - (instancetype)init
 {
-    NSURL *baseURL = [NSURL URLWithString:@"https://api.spark.io/v1/devices/53ff6a065075535133131687/"];
-    
-    self = [super initWithBaseURL:baseURL];
-    if (self)
-    {
-        // Init
-        NSUserDefaults *defaults = [NSUserDefaults standardUserDefaults];
-        [self setPollingInterval:[defaults pollingInterval]];
+    self = [super init];
+    if (self) {
     }
     return self;
 }
@@ -46,28 +41,6 @@ NSString * const BTBathroomManagerDidUpdateStatusNotification = @"com.willowtree
         _defaultManager = [BTBathroomManager new];
     });
     return _defaultManager;
-}
-
-- (void)startPolling
-{
-    if (![self isPolling])
-    {
-        [self setPolling:YES];
-        [self fetchBathrooms:nil];
-    }
-}
-
-- (void)stopPolling
-{
-    [self setPolling:NO];
-    [[self pollingTimer] invalidate];
-    [self setPollingTimer:nil];
-}
-
-- (void)setPollingInterval:(NSTimeInterval)pollingInterval
-{
-    _pollingInterval = pollingInterval;
-    [[NSUserDefaults standardUserDefaults] setPollingInterval:pollingInterval];
 }
 
 - (void)setBathrooms:(NSArray *)bathrooms
@@ -90,31 +63,56 @@ NSString * const BTBathroomManagerDidUpdateStatusNotification = @"com.willowtree
     return @[];
 }
 
-- (void)queueBathroomRequest
+- (void)getBathrooms
 {
-    NSTimer *timer = [NSTimer scheduledTimerWithTimeInterval:[self pollingInterval]
-                                                      target:self
-                                                    selector:@selector(fetchBathrooms:)
-                                                    userInfo:nil
-                                                     repeats:NO];
-    [self setPollingTimer:timer];
+    NSLog(@"Getting bathroom statuses");
+    
+    NSURL *url = [NSURL URLWithString:@"https://api.spark.io/v1/devices/53ff6a065075535133131687/doors?access_token=db04e1b5a6b6b0e2341d89369a49c15bd6b1b414"];
+    NSURLRequest *request = [NSURLRequest requestWithURL:url];
+    
+    NSURLResponse *response = nil;
+    NSError *error = nil;
+    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+    NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSDictionary *result = [self parseJSONString:string];
+    
+    if (error)
+    {
+        [self failure:error];
+    }
+    else
+    {
+        NSString *dataString = result[@"result"];
+        NSArray *bathroomsArray = [self parseJSONString:dataString];
+        
+        [self success:bathroomsArray];
+        [self pollBathrooms];
+    }
 }
 
-- (void)fetchBathrooms:(NSTimer *)timer
+- (void)pollBathrooms
 {
-    __weak BTBathroomManager *__weak_self = self;
-    [self getBathrooms:^(id response) {
-        
-        [__weak_self success:response];
-        [__weak_self queueBathroomRequest];
-        
-    } failure:^(NSError *error) {
-        
-        [__weak_self failure:error];
-        [__weak_self queueBathroomRequest];
-        
-    }];
+    NSLog(@"Setting up long polling for bathroom statuses.");
+    
+    [[NSURLCache sharedURLCache] removeAllCachedResponses];
+    
+    NSURL* requestUrl = [NSURL URLWithString:@"https://api.spark.io/v1/events/bathroom-tree"];
+    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestUrl];
+    [request setValue:@"Bearer db04e1b5a6b6b0e2341d89369a49c15bd6b1b414" forHTTPHeaderField:@"Authorization"];
+    
+    NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
+    [self setUrlConnection:connection];
+    [connection start];
 }
+
+- (id)parseJSONString:(NSString *)string
+{
+    NSError *error = nil;
+    id result = [NSJSONSerialization JSONObjectWithData:[string dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
+    return result;
+}
+
+#pragma mark - Completion
 
 - (void)success:(id)response
 {
@@ -132,6 +130,11 @@ NSString * const BTBathroomManagerDidUpdateStatusNotification = @"com.willowtree
         }
         
         [self setBathrooms:bathrooms];
+        
+        NSLog(@"Received bathroom data: %@ %@ %@",
+              response[0][@"occupied"],
+              response[1][@"occupied"],
+              response[2][@"occupied"]);
     }
 }
 
@@ -139,36 +142,34 @@ NSString * const BTBathroomManagerDidUpdateStatusNotification = @"com.willowtree
 {
     [self setError:error];
     [self setBathrooms:@[]];
+    NSLog(@"Bathrooms failed, restarting in 10 seconds");
+    [self performSelector:@selector(getBathrooms) withObject:nil afterDelay:10.0];
 }
 
-- (void)getBathrooms:(void(^)(id response))success failure:(void(^)(NSError *error))failure
+#pragma mark - NSURLConnectionDelegate Methods
+
+- (void)connection:(NSURLConnection *)connection didReceiveData:(NSData *)data
 {
-    [[NSURLCache sharedURLCache] removeAllCachedResponses];
+    NSLog(@"Long poll received data.");
     
-    NSString *path = @"doors";
+    [self setError:nil];
+    NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+    NSInteger location = [string rangeOfString:@"{\"data\":\""].location;
     
-    NSDictionary *parameters = @{
-                                 @"access_token": @"db04e1b5a6b6b0e2341d89369a49c15bd6b1b414"
-                                 };
-    
-    path = [[[self baseURL] absoluteString] stringByAppendingString:path];
-    
-    [self GET:path
-   parameters:parameters
-      success:^(AFHTTPRequestOperation *operation, id responseObject) {
-          
-          NSString *resultString = responseObject[@"result"];
-          
-          NSError *error = nil;
-          id result = [NSJSONSerialization JSONObjectWithData:[resultString dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
-          if (error == nil)
-          {
-              success(result);
-          }
-          
-      } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-          
-          failure(error);
-      }];
+    if (location != NSNotFound)
+    {
+        NSString *jsonString = [string substringFromIndex:location];
+        NSDictionary *rootDictionary = [self parseJSONString:jsonString];
+        NSString *dataString = rootDictionary[@"data"];
+        NSArray *result = [self parseJSONString:dataString];
+            
+        [self success:result];
+    }
 }
+
+- (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
+{
+    [self failure:error];
+}
+
 @end
