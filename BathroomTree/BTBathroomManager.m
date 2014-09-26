@@ -26,11 +26,8 @@ NSString * const BTBathroomManagerDidUpdateStatusNotification = @"com.willowtree
 
 - (instancetype)init
 {
-#ifndef DEBUG_SERVER
-    NSURL *baseURL = [NSURL URLWithString:@"http://sapling.willowtreeapps.com/"];
-#else
-    NSURL *baseURL = [NSURL URLWithString:@"http://localhost:8000/"];
-#endif
+    NSURL *baseURL = [NSURL URLWithString:@"https://api.spark.io/v1/devices/53ff6a065075535133131687/"];
+    
     self = [super initWithBaseURL:baseURL];
     if (self)
     {
@@ -125,11 +122,15 @@ NSString * const BTBathroomManagerDidUpdateStatusNotification = @"com.willowtree
     if ([response isKindOfClass:[NSArray class]])
     {
         NSMutableArray *bathrooms = [NSMutableArray new];
-        for (NSDictionary *attributes in response)
+        for (NSInteger i = 0; i < [response count]; i++)
         {
-            BTBathroom *bathroom = [[BTBathroom alloc] initWithAttributes:attributes];
+            NSDictionary *bathroomDictionary = response[i];
+            BTBathroom *bathroom = [BTBathroom new];
+            [bathroom setRoomNumber:i];
+            [bathroom setAvailable:[bathroomDictionary[@"occupied"] boolValue] == NO];
             [bathrooms addObject:bathroom];
         }
+        
         [self setBathrooms:bathrooms];
     }
 }
@@ -144,19 +145,26 @@ NSString * const BTBathroomManagerDidUpdateStatusNotification = @"com.willowtree
 {
     [[NSURLCache sharedURLCache] removeAllCachedResponses];
     
-#ifndef DEBUG_SERVER
-    NSString *path = @"bathroom/";
-#else
-    NSString *path = @"bathrooms.json";
-#endif
+    NSString *path = @"doors";
+    
+    NSDictionary *parameters = @{
+                                 @"access_token": @"db04e1b5a6b6b0e2341d89369a49c15bd6b1b414"
+                                 };
     
     path = [[[self baseURL] absoluteString] stringByAppendingString:path];
     
     [self GET:path
-   parameters:nil
+   parameters:parameters
       success:^(AFHTTPRequestOperation *operation, id responseObject) {
           
-          success(responseObject);
+          NSString *resultString = responseObject[@"result"];
+          
+          NSError *error = nil;
+          id result = [NSJSONSerialization JSONObjectWithData:[resultString dataUsingEncoding:NSUTF8StringEncoding] options:0 error:&error];
+          if (error == nil)
+          {
+              success(result);
+          }
           
       } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
           

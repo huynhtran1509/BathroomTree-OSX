@@ -13,6 +13,4 @@
 @property (nonatomic, assign, getter = isAvailable) BOOL available;
 @property (nonatomic, assign) NSInteger roomNumber;
 
-- (instancetype)initWithAttributes:(NSDictionary *)attributes;
-
 @end

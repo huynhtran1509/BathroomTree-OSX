@@ -10,15 +10,4 @@
 
 @implementation BTBathroom
 
-- (instancetype)initWithAttributes:(NSDictionary *)attributes
-{
-    self = [super init];
-    if (self)
-    {
-        [self setAvailable:[attributes[@"available"] boolValue]];
-        [self setRoomNumber:[attributes[@"room"] integerValue]];
-    }
-    return self;
-}
-
 @end
