@@ -117,7 +117,7 @@ NSString * const BTBathroomManagerDidUpdateStatusNotification = @"com.willowtree
 - (void)success:(id)response
 {
     [self setError:nil];
-    if ([response isKindOfClass:[NSArray class]])
+    if ([response isKindOfClass:[NSArray class]] && [response count] == 3)
     {
         NSMutableArray *bathrooms = [NSMutableArray new];
         for (NSInteger i = 0; i < [response count]; i++)
@@ -162,7 +162,7 @@ NSString * const BTBathroomManagerDidUpdateStatusNotification = @"com.willowtree
         NSDictionary *rootDictionary = [self parseJSONString:jsonString];
         NSString *dataString = rootDictionary[@"data"];
         NSArray *result = [self parseJSONString:dataString];
-            
+        
         [self success:result];
     }
 }
