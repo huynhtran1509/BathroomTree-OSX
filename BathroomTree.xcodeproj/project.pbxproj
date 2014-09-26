@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		3AEB982EC284481BBE26A505 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 819B8825E3824FC490011D35 /* libPods.a */; };
 		8724BF2F18942FC800A314F7 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 8724BF2E18942FC800A314F7 /* Cocoa.framework */; };
 		8724BF3918942FC800A314F7 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 8724BF3718942FC800A314F7 /* InfoPlist.strings */; };
 		8724BF3B18942FC800A314F7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 8724BF3A18942FC800A314F7 /* main.m */; };
@@ -36,7 +35,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		20C7C289E5C240EC9C77BE80 /* Pods.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = "<group>"; };
 		819B8825E3824FC490011D35 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		8724BF2B18942FC800A314F7 /* BathroomTree.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BathroomTree.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		8724BF2E18942FC800A314F7 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
@@ -73,7 +71,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8724BF2F18942FC800A314F7 /* Cocoa.framework in Frameworks */,
-				3AEB982EC284481BBE26A505 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -96,7 +93,6 @@
 				8724BF5218942FC800A314F7 /* BathroomTreeTests */,
 				8724BF2D18942FC800A314F7 /* Frameworks */,
 				8724BF2C18942FC800A314F7 /* Products */,
-				20C7C289E5C240EC9C77BE80 /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -187,11 +183,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 8724BF5C18942FC800A314F7 /* Build configuration list for PBXNativeTarget "BathroomTree" */;
 			buildPhases = (
-				DC4F744124D54709B643B759 /* Check Pods Manifest.lock */,
 				8724BF2718942FC800A314F7 /* Sources */,
 				8724BF2818942FC800A314F7 /* Frameworks */,
 				8724BF2918942FC800A314F7 /* Resources */,
-				84794A0A01484DC38DE537E6 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -275,39 +269,6 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
-
-/* Begin PBXShellScriptBuildPhase section */
-		84794A0A01484DC38DE537E6 /* Copy Pods Resources */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Copy Pods Resources";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		DC4F744124D54709B643B759 /* Check Pods Manifest.lock */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Check Pods Manifest.lock";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
-			showEnvVarsInLog = 0;
-		};
-/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		8724BF2718942FC800A314F7 /* Sources */ = {
@@ -447,7 +408,6 @@
 		};
 		8724BF5D18942FC800A314F7 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 20C7C289E5C240EC9C77BE80 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -463,7 +423,6 @@
 		};
 		8724BF5E18942FC800A314F7 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 20C7C289E5C240EC9C77BE80 /* Pods.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				COMBINE_HIDPI_IMAGES = YES;

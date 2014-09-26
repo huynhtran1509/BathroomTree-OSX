@@ -6,8 +6,6 @@
 //  Copyright (c) 2014 WillowTreeApps, Inc. All rights reserved.
 //
 
-#import <AFNetworking/AFHTTPRequestOperationManager.h>
-
 FOUNDATION_EXPORT NSString * const BTBathroomManagerDidUpdateStatusNotification;
 
 @class BTBathroom;
