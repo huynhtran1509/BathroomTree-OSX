@@ -163,7 +163,11 @@ NSString * const BTBathroomManagerDidUpdateStatusNotification = @"com.willowtree
         NSString *dataString = rootDictionary[@"data"];
         NSArray *result = [self parseJSONString:dataString];
         
-        [self success:result];
+        
+        if (rootDictionary && result)
+        {
+            [self success:result];
+        }
     }
 }
 
