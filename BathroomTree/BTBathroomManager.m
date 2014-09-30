@@ -73,6 +73,9 @@ NSString * const BTBathroomManagerDidUpdateStatusNotification = @"com.willowtree
 
 - (void)getBathrooms
 {
+    [[self pollingTimer] invalidate];
+    [self setPollingTimer:nil];
+    
     NSLog(@"Getting bathroom statuses");
     
     NSURL *url = [NSURL URLWithString:@"https://api.spark.io/v1/devices/53ff6a065075535133131687/doors?access_token=db04e1b5a6b6b0e2341d89369a49c15bd6b1b414"];
@@ -105,7 +108,7 @@ NSString * const BTBathroomManagerDidUpdateStatusNotification = @"com.willowtree
                     NSArray *bathroomsArray = [self parseJSONString:dataString];
                     
                     [self success:bathroomsArray];
-                    [self pollBathrooms];
+                    [self longPollBathrooms];
                 }
             }
             
@@ -115,19 +118,22 @@ NSString * const BTBathroomManagerDidUpdateStatusNotification = @"com.willowtree
     });
 }
 
-- (void)pollBathrooms
+- (void)longPollBathrooms
 {
-    NSLog(@"Setting up long polling for bathroom statuses.");
-    
-    [[NSURLCache sharedURLCache] removeAllCachedResponses];
-    
-    NSURL* requestUrl = [NSURL URLWithString:@"https://api.spark.io/v1/events/bathroom-tree"];
-    NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestUrl];
-    [request setValue:@"Bearer db04e1b5a6b6b0e2341d89369a49c15bd6b1b414" forHTTPHeaderField:@"Authorization"];
-    
-    NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
-    [self setUrlConnection:connection];
-    [connection start];
+    if ([self urlConnection] == nil)
+    {
+        NSLog(@"Setting up long polling for bathroom statuses.");
+        
+        [[NSURLCache sharedURLCache] removeAllCachedResponses];
+        
+        NSURL* requestUrl = [NSURL URLWithString:@"https://api.spark.io/v1/events/bathroom-tree"];
+        NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestUrl];
+        [request setValue:@"Bearer db04e1b5a6b6b0e2341d89369a49c15bd6b1b414" forHTTPHeaderField:@"Authorization"];
+        
+        NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
+        [self setUrlConnection:connection];
+        [connection start];
+    }
 }
 
 - (id)parseJSONString:(NSString *)string
@@ -165,8 +171,6 @@ NSString * const BTBathroomManagerDidUpdateStatusNotification = @"com.willowtree
 
 - (void)failure:(NSError *)error
 {
-    [[self pollingTimer] invalidate];
-    [self setPollingTimer:nil];
     [self setError:error];
     [self setBathrooms:@[]];
     NSLog(@"Bathrooms failed");
@@ -207,6 +211,7 @@ NSString * const BTBathroomManagerDidUpdateStatusNotification = @"com.willowtree
 
 - (void)connection:(NSURLConnection *)connection didFailWithError:(NSError *)error
 {
+    [self setUrlConnection:nil];
     [self failure:error];
 }
 
