@@ -30,7 +30,7 @@
 - (void)awakeFromNib
 {
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
-    [dateFormatter setDateFormat:@"M/dd/yy h:mm a"];
+    [dateFormatter setDateFormat:@"M/dd/yy h:mm:ss a"];
     [self setDateFormatter:dateFormatter];
     
     BTBathroomManager *manager = [BTBathroomManager defaultManager];
