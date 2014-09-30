@@ -29,6 +29,10 @@
 
 - (void)awakeFromNib
 {
+    NSDateFormatter *dateFormatter = [NSDateFormatter new];
+    [dateFormatter setDateFormat:@"M/dd/yy h:mm a"];
+    [self setDateFormatter:dateFormatter];
+    
     BTBathroomManager *manager = [BTBathroomManager defaultManager];
     [self configureWithBathrooms:[manager bathrooms]];
     
@@ -40,6 +44,7 @@
 
 - (void)bathroomManagerDidUpdateStateNotification:(NSNotification *)notification
 {
+    [[self lastUpdatedItem] setTitle:[NSString stringWithFormat:@"Updated %@", [[self dateFormatter] stringFromDate:[NSDate date]]]];
     BTBathroomManager *manager = [notification object];
     [self configureWithBathrooms:[manager bathrooms]];
 }

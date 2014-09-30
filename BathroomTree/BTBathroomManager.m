@@ -16,7 +16,6 @@ NSString * const BTBathroomManagerDidUpdateStatusNotification = @"com.willowtree
 @interface BTBathroomManager () <NSURLConnectionDataDelegate, NSURLConnectionDelegate>
 
 @property (nonatomic, readwrite, strong) NSTimer *pollingTimer;
-@property (nonatomic, readwrite, getter = isPolling) BOOL polling;
 @property (nonatomic, strong, readwrite) NSArray *bathrooms;
 @property (nonatomic, strong, readwrite) NSURLConnection *urlConnection;
 @property (nonatomic, strong, readwrite) NSError *error;
@@ -63,6 +62,15 @@ NSString * const BTBathroomManagerDidUpdateStatusNotification = @"com.willowtree
     return @[];
 }
 
+- (void)queueGetBathrooms
+{
+    if ([self pollingTimer] == nil)
+    {
+        NSLog(@"Queuing get bathrooms in 30 seconds.");
+        [self setPollingTimer:[NSTimer scheduledTimerWithTimeInterval:30.0 target:self selector:@selector(getBathrooms) userInfo:nil repeats:NO]];
+    }
+}
+
 - (void)getBathrooms
 {
     NSLog(@"Getting bathroom statuses");
@@ -70,24 +78,41 @@ NSString * const BTBathroomManagerDidUpdateStatusNotification = @"com.willowtree
     NSURL *url = [NSURL URLWithString:@"https://api.spark.io/v1/devices/53ff6a065075535133131687/doors?access_token=db04e1b5a6b6b0e2341d89369a49c15bd6b1b414"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
-    NSURLResponse *response = nil;
-    NSError *error = nil;
-    NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
-    NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-    NSDictionary *result = [self parseJSONString:string];
-    
-    if (error)
-    {
-        [self failure:error];
-    }
-    else
-    {
-        NSString *dataString = result[@"result"];
-        NSArray *bathroomsArray = [self parseJSONString:dataString];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
         
-        [self success:bathroomsArray];
-        [self pollBathrooms];
-    }
+        NSURLResponse *response = nil;
+        NSError *error = nil;
+        
+        NSData *data = [NSURLConnection sendSynchronousRequest:request returningResponse:&response error:&error];
+        NSString *string = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        NSDictionary *result = [self parseJSONString:string];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (error)
+            {
+                [self failure:error];
+            }
+            else
+            {
+                NSString *dataString = result[@"result"];
+                
+                if (dataString == nil)
+                {
+                    [self failure:[NSError errorWithDomain:@"bathroomtree" code:-999 userInfo:@{}]];
+                }
+                else
+                {
+                    NSArray *bathroomsArray = [self parseJSONString:dataString];
+                    
+                    [self success:bathroomsArray];
+                    [self pollBathrooms];
+                }
+            }
+            
+            [self setPollingTimer:nil];
+            [self queueGetBathrooms];
+        });
+    });
 }
 
 - (void)pollBathrooms
@@ -140,10 +165,12 @@ NSString * const BTBathroomManagerDidUpdateStatusNotification = @"com.willowtree
 
 - (void)failure:(NSError *)error
 {
+    [[self pollingTimer] invalidate];
+    [self setPollingTimer:nil];
     [self setError:error];
     [self setBathrooms:@[]];
-    NSLog(@"Bathrooms failed, restarting in 10 seconds");
-    [self performSelector:@selector(getBathrooms) withObject:nil afterDelay:10.0];
+    NSLog(@"Bathrooms failed");
+    [self queueGetBathrooms];
 }
 
 #pragma mark - NSURLConnectionDelegate Methods
@@ -161,12 +188,19 @@ NSString * const BTBathroomManagerDidUpdateStatusNotification = @"com.willowtree
         NSString *jsonString = [string substringFromIndex:location];
         NSDictionary *rootDictionary = [self parseJSONString:jsonString];
         NSString *dataString = rootDictionary[@"data"];
-        NSArray *result = [self parseJSONString:dataString];
         
-        
-        if (rootDictionary && result)
+        if (rootDictionary && [rootDictionary isKindOfClass:[NSDictionary class]] && dataString)
         {
-            [self success:result];
+            NSArray *result = [self parseJSONString:dataString];
+            
+            if (rootDictionary && result)
+            {
+                [self success:result];
+            }
+        }
+        else
+        {
+            NSLog(@"Bad response: %@", string);
         }
     }
 }

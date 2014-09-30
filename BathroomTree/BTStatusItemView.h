@@ -12,6 +12,8 @@
 
 @property (nonatomic, readwrite, weak) NSStatusItem *statusItem;
 @property (nonatomic, readwrite, strong) IBOutlet NSMenuItem *descriptionItem;
+@property (nonatomic, readwrite, strong) IBOutlet NSMenuItem *lastUpdatedItem;
+@property (nonatomic, readwrite, strong) NSDateFormatter *dateFormatter;
 
 - (void)configureWithBathrooms:(NSArray *)bathrooms;
 + (NSString *)bathroomDescriptionText:(NSInteger)count;

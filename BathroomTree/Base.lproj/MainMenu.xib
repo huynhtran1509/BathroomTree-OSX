@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6245" systemVersion="13E28" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
+<document type="com.apple.InterfaceBuilder3.Cocoa.XIB" version="3.0" toolsVersion="6245" systemVersion="13F34" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none">
     <dependencies>
         <deployment defaultVersion="1080" identifier="macosx"/>
         <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="6245"/>
@@ -25,6 +25,9 @@
                                 </connections>
                             </menuItem>
                             <menuItem title="Version Number" id="tYW-pf-9bW">
+                                <modifierMask key="keyEquivalentModifierMask"/>
+                            </menuItem>
+                            <menuItem title="Last Updated" id="ujJ-KY-FfU">
                                 <modifierMask key="keyEquivalentModifierMask"/>
                             </menuItem>
                             <menuItem title="Notify Me When" id="XDu-Yv-FeX">
@@ -97,6 +100,7 @@
             </subviews>
             <connections>
                 <outlet property="descriptionItem" destination="jIt-eT-bIM" id="28d-1J-DXa"/>
+                <outlet property="lastUpdatedItem" destination="ujJ-KY-FfU" id="fgr-az-gAo"/>
                 <outlet property="leaf1View" destination="vGl-yb-49q" id="dA3-3L-LXk"/>
                 <outlet property="leaf2View" destination="qbJ-1b-Mbi" id="mEj-HB-Uwa"/>
                 <outlet property="leaf3View" destination="QiB-6m-Boe" id="Efy-0L-VDM"/>
