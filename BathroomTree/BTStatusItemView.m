@@ -12,7 +12,7 @@
 
 @interface BTStatusItemView () <NSMenuDelegate>
 
-@property (nonatomic, readwrite, weak) IBOutlet NSImageView *stemView;
+@property (nonatomic, readwrite, weak) IBOutlet NSImageView *bgView;
 @property (nonatomic, readwrite, weak) IBOutlet NSImageView *leaf1View;
 @property (nonatomic, readwrite, weak) IBOutlet NSImageView *leaf2View;
 @property (nonatomic, readwrite, weak) IBOutlet NSImageView *leaf3View;
@@ -29,6 +29,8 @@
 
 - (void)awakeFromNib
 {
+    [super awakeFromNib];
+    
     NSDateFormatter *dateFormatter = [NSDateFormatter new];
     [dateFormatter setDateFormat:@"M/dd/yy h:mm:ss a"];
     [self setDateFormatter:dateFormatter];
@@ -40,6 +42,32 @@
                                              selector:@selector(bathroomManagerDidUpdateStateNotification:)
                                                  name:BTBathroomManagerDidUpdateStatusNotification
                                                object:nil];
+    
+    [self updateImageViewsForLightOrDarkMode];
+    
+    [[NSDistributedNotificationCenter defaultCenter] addObserver:self selector:@selector(updateImageViewsForLightOrDarkMode) name:@"AppleInterfaceThemeChangedNotification" object:nil];
+}
+
+- (void)updateImageViewsForLightOrDarkMode
+{
+    NSDictionary *dict = [[NSUserDefaults standardUserDefaults] persistentDomainForName:NSGlobalDomain];
+    id style = [dict objectForKey:@"AppleInterfaceStyle"];
+    BOOL darkModeOn = ( style && [style isKindOfClass:[NSString class]] && NSOrderedSame == [style caseInsensitiveCompare:@"dark"]);
+    
+    if (darkModeOn)
+    {
+        [[self bgView] setImage:[NSImage imageNamed:@"tree_background_dark"]];
+        [[self leaf1View] setImage:[NSImage imageNamed:@"leaf_1_dark"]];
+        [[self leaf2View] setImage:[NSImage imageNamed:@"leaf_2_dark"]];
+        [[self leaf3View] setImage:[NSImage imageNamed:@"leaf_3_dark"]];
+    }
+    else
+    {
+        [[self bgView] setImage:[NSImage imageNamed:@"tree_background"]];
+        [[self leaf1View] setImage:[NSImage imageNamed:@"leaf_1"]];
+        [[self leaf2View] setImage:[NSImage imageNamed:@"leaf_2"]];
+        [[self leaf3View] setImage:[NSImage imageNamed:@"leaf_3"]];
+    }
 }
 
 - (void)bathroomManagerDidUpdateStateNotification:(NSNotification *)notification
@@ -56,7 +84,6 @@
         [self updateVacantView:[self leaf1View] isVacant:NO];
         [self updateVacantView:[self leaf2View] isVacant:NO];
         [self updateVacantView:[self leaf3View] isVacant:NO];
-        [self updateVacantView:[self stemView] isVacant:NO];
         
         NSString *text = [BTStatusItemView bathroomDescriptionText:0];
         [[self descriptionItem] setTitle:text];
@@ -73,8 +100,6 @@
         
         NSPredicate *predicate = [NSPredicate predicateWithFormat:@"available = %@", @(YES)];
         NSArray *availableBathrooms = [bathrooms filteredArrayUsingPredicate:predicate];
-        [self updateVacantView:[self stemView]
-                      isVacant:([availableBathrooms count])];
         
         NSString *text = [BTStatusItemView bathroomDescriptionText:([availableBathrooms count])];
         [[self descriptionItem] setTitle:text];
@@ -138,12 +163,6 @@
 {
     [self setSelected:NO];
     [self setNeedsDisplay:YES];
-}
-
-- (void)drawRect:(NSRect)dirtyRect
-{
-    [[self statusItem] drawStatusBarBackgroundInRect:dirtyRect
-                                       withHighlight:[self selected]];
 }
 
 @end

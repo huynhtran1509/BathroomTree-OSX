@@ -2,13 +2,12 @@
   "images" : [
     {
       "idiom" : "universal",
-      "scale" : "1x",
-      "filename" : "tree_stem.png"
+      "scale" : "1x"
     },
     {
       "idiom" : "universal",
       "scale" : "2x",
-      "filename" : "tree_stem@2x.png"
+      "filename" : "leaf_2_dark@2x.png"
     },
     {
       "idiom" : "universal",

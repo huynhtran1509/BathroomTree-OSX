@@ -122,7 +122,6 @@
 - (void)setupStatusItem
 {
     NSStatusItem *statusItem = [[NSStatusBar systemStatusBar] statusItemWithLength:NSVariableStatusItemLength];
-    [statusItem setHighlightMode:YES];
     [statusItem setView:[self statusItemView]];
     [statusItem setMenu:[self menu]];
     [[self statusItemView] setStatusItem:statusItem];
