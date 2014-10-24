@@ -78,17 +78,17 @@
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageScaling="proportionallyDown" image="tree_background" id="Vhr-aT-SoW"/>
                 </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="vGl-yb-49q" userLabel="Leaf 1">
-                    <rect key="frame" x="0.0" y="1" width="22" height="22"/>
+                    <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="bottom" imageScaling="proportionallyDown" image="leaf_1" id="3Cp-rc-fkO"/>
                 </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="qbJ-1b-Mbi" userLabel="Leaf 2">
-                    <rect key="frame" x="0.0" y="1" width="22" height="22"/>
+                    <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="bottom" imageScaling="proportionallyDown" image="leaf_2" id="dnJ-eW-uLk"/>
                 </imageView>
                 <imageView horizontalHuggingPriority="251" verticalHuggingPriority="251" id="QiB-6m-Boe" userLabel="Leaf 3">
-                    <rect key="frame" x="0.0" y="1" width="22" height="22"/>
+                    <rect key="frame" x="0.0" y="0.0" width="22" height="22"/>
                     <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                     <imageCell key="cell" refusesFirstResponder="YES" alignment="left" imageAlignment="bottom" imageScaling="proportionallyDown" image="leaf_3" id="C72-0I-s8e"/>
                 </imageView>
