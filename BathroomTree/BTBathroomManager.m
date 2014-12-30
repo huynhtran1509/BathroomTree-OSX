@@ -78,7 +78,7 @@ NSString * const BTBathroomManagerDidUpdateStatusNotification = @"com.willowtree
     
     NSLog(@"Getting bathroom statuses");
     
-    NSURL *url = [NSURL URLWithString:@"https://api.spark.io/v1/devices/53ff6a065075535133131687/doors?access_token=db04e1b5a6b6b0e2341d89369a49c15bd6b1b414"];
+    NSURL *url = [NSURL URLWithString:@"https://api.spark.io/v1/devices/53ff6a065075535133131687/doors?access_token=8053e8e058b8f06fa88081e4922f7bd21fe6400a"];
     NSURLRequest *request = [NSURLRequest requestWithURL:url];
     
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_BACKGROUND, 0), ^{
@@ -128,7 +128,7 @@ NSString * const BTBathroomManagerDidUpdateStatusNotification = @"com.willowtree
         
         NSURL* requestUrl = [NSURL URLWithString:@"https://api.spark.io/v1/events/bathroom-tree"];
         NSMutableURLRequest *request = [NSMutableURLRequest requestWithURL:requestUrl];
-        [request setValue:@"Bearer db04e1b5a6b6b0e2341d89369a49c15bd6b1b414" forHTTPHeaderField:@"Authorization"];
+        [request setValue:@"Bearer 8053e8e058b8f06fa88081e4922f7bd21fe6400a" forHTTPHeaderField:@"Authorization"];
         
         NSURLConnection *connection = [NSURLConnection connectionWithRequest:request delegate:self];
         [self setUrlConnection:connection];
